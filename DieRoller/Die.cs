@@ -22,7 +22,7 @@
 		/// <summary>
 		/// True if the die is currently held
 		/// </summary>
-		public bool isHeld { get; set; }
+		public bool IsHeld { get; set; }
        
 
         /// <summary>
@@ -32,12 +32,14 @@
 		/// <returns>Returns the new random number</returns>
 		public byte Roll()
 		{
-			// Generate random number
-			Random random = new();
-			byte newValue = (byte)random.Next(1, 7);
+			if (!IsHeld)
+			{
+				// Generate random number
+				Random random = new();
+				byte newValue = (byte)random.Next(1, 7);
 
-			FaceValue = newValue;
-			
+				FaceValue = newValue;
+			}
 			return FaceValue;
 		}
     }
