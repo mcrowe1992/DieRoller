@@ -5,15 +5,31 @@
 	/// </summary>
 	public class Die
 	{
+		private static Random _random;
+
+		static Die()
+		{
+			_random = new Random();
+		}
+
 		/// <summary>
-		/// The current face up value of the die
+		/// Creates the dies and rolls it to 
+		/// start with a random number
 		/// </summary>
-        public byte FaceValue { get; set; }
+        public Die()
+        {
+			Roll();
+        }
+
+        /// <summary>
+        /// The current face up value of the die
+        /// </summary>
+        public byte FaceValue { get; private set; }
 
 		/// <summary>
 		/// True if the die is currently held
 		/// </summary>
-		public bool isHeld { get; set; }
+		public bool IsHeld { get; set; }
        
 
         /// <summary>
@@ -23,10 +39,15 @@
 		/// <returns>Returns the new random number</returns>
 		public byte Roll()
 		{
-			// Generate random number
-			// Set to face value
-			// Return new number
-			throw new NotImplementedException
+			if (!IsHeld)
+			{
+				// Generate random number
+		
+				byte newValue = (byte)_random.Next(1, 7);
+
+				FaceValue = newValue;
+			}
+			return FaceValue;
 		}
     }
 }
